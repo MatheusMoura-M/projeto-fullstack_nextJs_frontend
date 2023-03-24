@@ -1,11 +1,15 @@
+import ContactsList from "@/components/contactsList";
 import Header from "@/components/header";
+import { useAuth } from "@/context/authContext";
 import { GetServerSideProps } from "next";
 import nookies from "nookies";
 
 const Dashboard = () => {
+  const { isContainsContacts, setIsContainsContacts } = useAuth();
   return (
     <>
       <Header isLogged />
+      {isContainsContacts && <ContactsList />}
     </>
   );
 };
@@ -21,7 +25,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     };
   }
   return {
-    props: { name: cookies["kenzie.token"] },
+    props: { token: cookies["kenzie.token"] },
   };
 };
 

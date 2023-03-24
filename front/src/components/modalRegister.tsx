@@ -10,7 +10,6 @@ import {
   Modal,
   ModalBody,
   ModalContent,
-  ModalCloseButton,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
@@ -19,13 +18,11 @@ import {
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { iClientRegister } from "@/types";
-import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useAuth } from "@/context/authContext";
 import { formRegisterSchema } from "@/schemas";
 
 const ModalRegister = () => {
-  const { onRegister } = useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const {
@@ -39,6 +36,7 @@ const ModalRegister = () => {
     setInputPassword,
     setInputPhone,
     setShowPassword,
+    onRegister,
   } = useAuth();
 
   const nameError = inputName === "";
@@ -60,7 +58,7 @@ const ModalRegister = () => {
 
   return (
     <>
-      <Button variant="default" onClick={onOpen}>
+      <Button variant="violet" onClick={onOpen}>
         Register
       </Button>
 
@@ -149,7 +147,7 @@ const ModalRegister = () => {
           <ModalFooter>
             <Button
               size="lg"
-              variant={"default"}
+              variant={"violet"}
               onClick={handleSubmit(onFormSubmit)}
               _hover={{
                 bg: "blue.700",

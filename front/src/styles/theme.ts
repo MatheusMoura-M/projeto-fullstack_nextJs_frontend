@@ -65,8 +65,9 @@ const custonTheme = extendTheme({
   styles: {
     global: {
       body: {
-        bg: "white",
-        // color: "blue.600",
+        bg: "rgb(25,3,43)",
+        bgGradient:
+          "linear-gradient(35deg, rgba(25,3,43,1) 0%, rgba(63,14,111,1) 45%, rgba(152,17,193,1) 87%)",
       },
     },
   },
@@ -74,13 +75,17 @@ const custonTheme = extendTheme({
     Button: {
       variants: {
         default: {
-          bg: "blue.600",
+          bg: "red.500",
           border: "2px solid",
-          borderColor: "blue.600",
-          color: "gray.50",
+          borderColor: "red.600",
+          color: "gray.800",
           _hover: {
-            bg: "blue.700",
+            bg: "red.700",
+            color: "gray.100",
+            borderColor: "red.300",
+            transition: "0.5s",
           },
+          transition: "0.5s",
         },
         disabled: {
           bg: "gray.500",
@@ -116,6 +121,30 @@ const custonTheme = extendTheme({
           color: "gray.50",
           _hover: {
             color: "white",
+          },
+        },
+        violet: {
+          bg: "#6b1885",
+          border: "2px solid",
+          borderColor: "#b02be5",
+          color: "gray.200",
+          _hover: {
+            bg: "#b02be5",
+            color: "gray.800",
+            borderColor: "#6b1885",
+            transition: "0.5s",
+          },
+          transition: "0.5s",
+        },
+        close: {
+          size: "lg",
+          bg: "red.600",
+          border: "2px solid",
+          borderColor: "red.700",
+          borderRadius: "50%",
+          color: "gray.200",
+          _hover: {
+            bg: "red.700",
           },
         },
       },

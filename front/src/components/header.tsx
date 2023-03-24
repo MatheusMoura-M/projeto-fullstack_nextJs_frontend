@@ -21,30 +21,16 @@ import ModalForm from "./modalForm";
 import { destroyCookie } from "nookies";
 import { useAuth } from "@/context/authContext";
 import ModalRegister from "./modalRegister";
+import ModalRegisterContact from "./modalContact";
 
-const Links = ["Posts", "Tags", "About"];
-
-const NavLink = ({ children }: { children: ReactNode }) => (
-  <Link
-    px={2}
-    py={1}
-    rounded={"md"}
-    _hover={{
-      textDecoration: "none",
-      bg: "blue.300",
-      color: "white",
-    }}
-    href={"#"}
-  >
-    {children}
-  </Link>
-);
+const Links = ["Contatos", "About"];
 
 interface IHeaderProps {
   isLogged?: boolean;
 }
 
 const Header = ({ isLogged = false }: IHeaderProps) => {
+  const { NavLink } = useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
   const logout = () => {
@@ -54,35 +40,39 @@ const Header = ({ isLogged = false }: IHeaderProps) => {
 
   return (
     <>
-      <Box bg={"blue.600"} px={4}>
+      <Box
+        bg={"rgb(211,100,245)"}
+        bgGradient={
+          "radial-gradient(circle, rgba(211,100,245,1) 0%, rgba(182,141,222,1) 45%, rgba(195,153,204,1) 87%)"
+        }
+        px={4}
+      >
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          {/* <IconButton
-            size={"md"}
-            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-            aria-label={"Open Menu"}
-            display={{ md: "none" }}
-            onClick={isOpen ? onClose : onOpen}
-          /> */}
           <HStack spacing={8} alignItems={"center"}>
             <Box>
-              <Text fontWeight={"bold"} fontSize={20} color={"white"}>
+              <Text fontWeight={"bold"} fontSize={20} color={"gray.800"}>
                 Kenzie
               </Text>
             </Box>
-            <HStack
-              color={"white"}
-              as={"nav"}
-              spacing={4}
-              display={{ base: "none", md: "flex" }}
-            >
-              {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
-              ))}
-            </HStack>
+            {isLogged ? (
+              <HStack
+                color={"white"}
+                as={"nav"}
+                spacing={4}
+                display={{ base: "none", md: "flex" }}
+              >
+                {Links.map((link) => (
+                  <NavLink key={link}>{link}</NavLink>
+                ))}
+              </HStack>
+            ) : (
+              <Stack display={"none"}></Stack>
+            )}
           </HStack>
           <Flex alignItems={"center"}>
             {isLogged ? (
-              <>
+              <HStack spacing={5}>
+                <ModalRegisterContact />
                 <Menu>
                   <MenuButton
                     as={Button}
@@ -93,22 +83,38 @@ const Header = ({ isLogged = false }: IHeaderProps) => {
                   >
                     <Avatar size={"sm"} />
                   </MenuButton>
-                  <MenuList bg={"blue.600"}>
+                  <MenuList
+                    display={"flex"}
+                    maxH={"45px"}
+                    bg={"#6b1885"}
+                    _hover={{
+                      bg: "#b02be5",
+                      color: "white",
+                    }}
+                    transition="0.2s"
+                    minW={"100px"}
+                  >
                     <MenuItem
-                      bg={"blue.600"}
-                      color={"white"}
+                      justifyContent={"center"}
+                      bg={"none"}
+                      color={"gray.200"}
                       onClick={() => logout()}
+                      _hover={{
+                        color: "gray.800",
+                        transition: "0.2s",
+                      }}
+                      transition="0.2s"
                     >
                       Sair
                     </MenuItem>
                   </MenuList>
                 </Menu>
-              </>
+              </HStack>
             ) : (
-              <>
+              <HStack spacing={5}>
                 <ModalForm />
                 <ModalRegister />
-              </>
+              </HStack>
             )}
           </Flex>
         </Flex>

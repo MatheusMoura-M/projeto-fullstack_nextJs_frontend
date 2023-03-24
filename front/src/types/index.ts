@@ -12,6 +12,18 @@ export interface iClientRegister {
   phone: number;
 }
 
+export interface iContactRegister {
+  name: string;
+  email: string;
+  phone: number;
+}
+
+export interface iContactResponse extends iContactRegister {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface iProviderProps {
   children: ReactNode;
 }

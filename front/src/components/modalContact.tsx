@@ -5,8 +5,6 @@ import {
   FormHelperText,
   FormLabel,
   Input,
-  InputGroup,
-  InputRightElement,
   Modal,
   ModalBody,
   ModalContent,
@@ -17,49 +15,67 @@ import {
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { iClientLogin } from "@/types";
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { iClientRegister } from "@/types";
 import { useAuth } from "@/context/authContext";
-import { formLoginSchema } from "@/schemas";
+import { formRegisterContactSchema } from "@/schemas";
 
-const ModalForm = () => {
+const ModalRegisterContact = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   const {
+    inputName,
     inputEmail,
-    inputPassword,
-    showPassword,
+    inputPhone,
+    setInputName,
     setInputEmail,
-    setInputPassword,
-    setShowPassword,
-    onLogin,
+    setInputPhone,
+    onRegisterContact,
   } = useAuth();
 
+  const nameError = inputName === "";
   const emailError = inputEmail === "";
-  const passwordError = inputPassword === "";
+  const phoneError = inputPhone === "";
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<iClientLogin>({
-    resolver: yupResolver(formLoginSchema),
+  } = useForm<iClientRegister>({
+    resolver: yupResolver(formRegisterContactSchema),
   });
 
-  const onFormSubmit = (formData: iClientLogin) => {
-    onLogin(formData);
+  const onFormSubmit = (formData: iClientRegister) => {
+    onRegisterContact(formData);
   };
 
   return (
     <>
       <Button variant="violet" onClick={onOpen}>
-        Login
+        Register Contact
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Faça login</ModalHeader>
+          <ModalHeader>Cadatre um cliente</ModalHeader>
           <ModalBody pb={6}>
+            <FormControl id="name" isRequired isInvalid={nameError}>
+              <FormLabel>Name</FormLabel>
+              <Input
+                required
+                focusBorderColor="blue.300"
+                errorBorderColor="red.300"
+                type="text"
+                {...register("name")}
+                onChange={(e) => setInputName(e.target.value)}
+              />
+              {!nameError ? (
+                <FormHelperText>Digite seu nome</FormHelperText>
+              ) : (
+                <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
+              )}
+            </FormControl>
+
             <FormControl id="email" isRequired isInvalid={emailError}>
               <FormLabel>E-mail</FormLabel>
               <Input
@@ -76,32 +92,21 @@ const ModalForm = () => {
                 <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
               )}
             </FormControl>
-            <FormControl id="password" isRequired isInvalid={passwordError}>
-              <FormLabel>Password</FormLabel>
-              <InputGroup>
-                <Input
-                  required
-                  focusBorderColor="blue.300"
-                  errorBorderColor="red.300"
-                  type={showPassword ? "text" : "password"}
-                  {...register("password")}
-                  onChange={(e) => setInputPassword(e.target.value)}
-                />
-                <InputRightElement h={"full"}>
-                  <Button
-                    variant={"ghost"}
-                    onClick={() =>
-                      setShowPassword((showPassword) => !showPassword)
-                    }
-                  >
-                    {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                  </Button>
-                </InputRightElement>
-              </InputGroup>
-              {!passwordError ? (
-                <FormHelperText>Digite sua senha</FormHelperText>
+
+            <FormControl id="phone" isRequired isInvalid={phoneError}>
+              <FormLabel>Phone</FormLabel>
+              <Input
+                required
+                focusBorderColor="blue.300"
+                errorBorderColor="red.300"
+                type="number"
+                {...register("phone")}
+                onChange={(e) => setInputPhone(e.target.value)}
+              />
+              {!phoneError ? (
+                <FormHelperText>Digite seu telefone</FormHelperText>
               ) : (
-                <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
+                <FormErrorMessage>{errors.phone?.message}</FormErrorMessage>
               )}
             </FormControl>
           </ModalBody>
@@ -111,7 +116,7 @@ const ModalForm = () => {
               variant={"violet"}
               onClick={handleSubmit(onFormSubmit)}
             >
-              Entrar
+              Cadastrar
             </Button>
             <Button size="lg" onClick={onClose}>
               Cancel
@@ -123,4 +128,4 @@ const ModalForm = () => {
   );
 };
 
-export default ModalForm;
+export default ModalRegisterContact;
