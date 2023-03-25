@@ -11,25 +11,33 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
-  useDisclosure,
 } from "@chakra-ui/react";
 
 const ContactsList = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const { allContacts, ContactItem } = useAuth();
+  const {
+    allContacts,
+    ContactItem,
+    isContainsContacts,
+    setIsContainsContacts,
+  } = useAuth();
 
   return (
     <>
-      <Button variant="violet" onClick={onOpen}>
-        Abrir
-      </Button>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal
+        isOpen={isContainsContacts}
+        onClose={() => setIsContainsContacts(false)}
+      >
         <ModalOverlay />
-        <ModalContent mt={20} mb={0} h={530}>
-          <HStack>
+        <ModalContent mt={20} mb={0} pb={5} h={"max-content"}>
+          <HStack justifyContent={"space-between"} mr={4}>
             <ModalHeader py={3}>Agenda</ModalHeader>
-            <Button variant={"close"} onClick={onClose}>
-              <CloseIcon />
+            <Button
+              variant={"close"}
+              onClick={() => setIsContainsContacts(false)}
+              minW={8}
+              maxH={27}
+            >
+              <CloseIcon fontSize={10} />
             </Button>
           </HStack>
           <ModalBody py={0} px={0} ml={3} mr={1}>
@@ -38,6 +46,7 @@ const ContactsList = () => {
                 allContacts.map((contact: iContactResponse) => (
                   <ContactItem
                     key={contact.email}
+                    id={contact.id}
                     name={contact.name}
                     email={contact.email}
                     phone={contact.phone}

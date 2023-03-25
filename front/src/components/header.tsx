@@ -21,22 +21,19 @@ import ModalForm from "./modalForm";
 import { destroyCookie } from "nookies";
 import { useAuth } from "@/context/authContext";
 import ModalRegister from "./modalRegister";
-import ModalRegisterContact from "./modalContact";
+import ModalRegisterContact from "./modalRegisterContact";
 
-const Links = ["Contatos", "About"];
+const Links = ["Contatos"];
+const BtnDefault = ["Sair", "Perfil"];
+const AllBtn = ["Contatos", "Sair", "Perfil"];
 
 interface IHeaderProps {
   isLogged?: boolean;
 }
 
 const Header = ({ isLogged = false }: IHeaderProps) => {
-  const { NavLink } = useAuth();
+  const { NavLink, MenuHamburguer } = useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const router = useRouter();
-  const logout = () => {
-    destroyCookie(null, "kenzie.token");
-    router.push("/");
-  };
 
   return (
     <>
@@ -54,7 +51,7 @@ const Header = ({ isLogged = false }: IHeaderProps) => {
                 Kenzie
               </Text>
             </Box>
-            {isLogged ? (
+            {isLogged && (
               <HStack
                 color={"white"}
                 as={"nav"}
@@ -65,51 +62,63 @@ const Header = ({ isLogged = false }: IHeaderProps) => {
                   <NavLink key={link}>{link}</NavLink>
                 ))}
               </HStack>
-            ) : (
-              <Stack display={"none"}></Stack>
             )}
           </HStack>
           <Flex alignItems={"center"}>
             {isLogged ? (
-              <HStack spacing={5}>
+              <>
                 <ModalRegisterContact />
-                <Menu>
-                  <MenuButton
-                    as={Button}
-                    rounded={"full"}
-                    variant={"link"}
-                    cursor={"pointer"}
-                    minW={0}
-                  >
-                    <Avatar size={"sm"} />
-                  </MenuButton>
-                  <MenuList
-                    display={"flex"}
-                    maxH={"45px"}
-                    bg={"#6b1885"}
-                    _hover={{
-                      bg: "#b02be5",
-                      color: "white",
-                    }}
-                    transition="0.2s"
-                    minW={"100px"}
-                  >
-                    <MenuItem
-                      justifyContent={"center"}
-                      bg={"none"}
-                      color={"gray.200"}
-                      onClick={() => logout()}
+                <HStack
+                  flexDirection={"column"}
+                  position={"absolute"}
+                  top={"1rem"}
+                  right={"1rem"}
+                  alignItems={"flex-end"}
+                  gap={"0.5rem"}
+                >
+                  <Menu>
+                    <MenuButton
+                      as={Button}
+                      rounded={"full"}
+                      variant={"link"}
+                      cursor={"pointer"}
+                      minW={0}
+                    >
+                      <Avatar size={"sm"} />
+                    </MenuButton>
+                    <MenuList
+                      display={{ base: "none", md: "flex" }}
+                      flexDirection={"column"}
+                      maxH={"max-content"}
+                      bg={"#6b1885"}
                       _hover={{
-                        color: "gray.800",
-                        transition: "0.2s",
+                        color: "white",
                       }}
                       transition="0.2s"
+                      minW={"100px"}
                     >
-                      Sair
-                    </MenuItem>
-                  </MenuList>
-                </Menu>
-              </HStack>
+                      {BtnDefault.map((link) => (
+                        <MenuHamburguer key={link}>{link}</MenuHamburguer>
+                      ))}
+                    </MenuList>
+                    <MenuList
+                      display={{ base: "flex", md: "none" }}
+                      flexDirection={"column"}
+                      maxH={"max-content"}
+                      bg={"#6b1885"}
+                      _hover={{
+                        color: "white",
+                      }}
+                      transition="0.2s"
+                      minW={"100px"}
+                    >
+                      {AllBtn.map((link) => (
+                        <MenuHamburguer key={link}>{link}</MenuHamburguer>
+                      ))}
+                    </MenuList>
+                  </Menu>
+                </HStack>
+              </>
             ) : (
               <HStack spacing={5}>
                 <ModalForm />
@@ -118,16 +127,6 @@ const Header = ({ isLogged = false }: IHeaderProps) => {
             )}
           </Flex>
         </Flex>
-
-        {isOpen ? (
-          <Box pb={4} display={{ md: "none" }}>
-            <Stack as={"nav"} spacing={6} color={"white"}>
-              {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
-              ))}
-            </Stack>
-          </Box>
-        ) : null}
       </Box>
     </>
   );

@@ -143,6 +143,7 @@ const custonTheme = extendTheme({
           borderColor: "red.700",
           borderRadius: "50%",
           color: "gray.200",
+          p: "0px",
           _hover: {
             bg: "red.700",
           },

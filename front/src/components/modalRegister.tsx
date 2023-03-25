@@ -133,7 +133,7 @@ const ModalRegister = () => {
                 required
                 focusBorderColor="blue.300"
                 errorBorderColor="red.300"
-                type="number"
+                type="text"
                 {...register("phone")}
                 onChange={(e) => setInputPhone(e.target.value)}
               />

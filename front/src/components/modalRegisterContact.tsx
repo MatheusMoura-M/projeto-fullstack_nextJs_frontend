@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   FormControl,
   FormErrorMessage,
@@ -15,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { iClientRegister } from "@/types";
+import { iContactRegister } from "@/types";
 import { useAuth } from "@/context/authContext";
 import { formRegisterContactSchema } from "@/schemas";
 
@@ -40,16 +41,16 @@ const ModalRegisterContact = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<iClientRegister>({
+  } = useForm<iContactRegister>({
     resolver: yupResolver(formRegisterContactSchema),
   });
 
-  const onFormSubmit = (formData: iClientRegister) => {
+  const onFormSubmit = (formData: iContactRegister) => {
     onRegisterContact(formData);
   };
 
   return (
-    <>
+    <Box position={"absolute"} right={"4rem"}>
       <Button variant="violet" onClick={onOpen}>
         Register Contact
       </Button>
@@ -57,7 +58,7 @@ const ModalRegisterContact = () => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Cadatre um cliente</ModalHeader>
+          <ModalHeader>Cadatre um contato</ModalHeader>
           <ModalBody pb={6}>
             <FormControl id="name" isRequired isInvalid={nameError}>
               <FormLabel>Name</FormLabel>
@@ -99,7 +100,7 @@ const ModalRegisterContact = () => {
                 required
                 focusBorderColor="blue.300"
                 errorBorderColor="red.300"
-                type="number"
+                type="text"
                 {...register("phone")}
                 onChange={(e) => setInputPhone(e.target.value)}
               />
@@ -124,7 +125,7 @@ const ModalRegisterContact = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-    </>
+    </Box>
   );
 };
 

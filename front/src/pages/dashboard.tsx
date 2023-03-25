@@ -1,15 +1,20 @@
 import ContactsList from "@/components/contactsList";
 import Header from "@/components/header";
+import ModalClient from "@/components/modalClient";
+import ModalUpdateContact from "@/components/modalUpdateContact";
 import { useAuth } from "@/context/authContext";
 import { GetServerSideProps } from "next";
 import nookies from "nookies";
 
 const Dashboard = () => {
-  const { isContainsContacts, setIsContainsContacts } = useAuth();
+  const { isContainsContacts, showModalUpdateContact, isContainsClient } =
+    useAuth();
   return (
     <>
       <Header isLogged />
       {isContainsContacts && <ContactsList />}
+      {showModalUpdateContact && <ModalUpdateContact />}
+      {isContainsClient && <ModalClient />}
     </>
   );
 };

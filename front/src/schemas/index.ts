@@ -15,7 +15,7 @@ const formRegisterSchema = yup.object().shape({
     .email("Deve ser um e-mail válido")
     .required("E-mail obrigatório"),
   password: yup.string().required("Senha obrigatória"),
-  phone: yup.number().required("Telefone obrigatório"),
+  phone: yup.string().required("Telefone obrigatório"),
 });
 
 const formRegisterContactSchema = yup.object().shape({
@@ -24,7 +24,18 @@ const formRegisterContactSchema = yup.object().shape({
     .string()
     .email("Deve ser um e-mail válido")
     .required("E-mail obrigatório"),
-  phone: yup.number().required("Telefone obrigatório"),
+  phone: yup.string().required("Telefone obrigatório"),
 });
 
-export { formLoginSchema, formRegisterSchema, formRegisterContactSchema };
+const formUpdateContactSchema = yup.object().shape({
+  name: yup.string().notRequired(),
+  email: yup.string().email("Deve ser um e-mail válido").notRequired(),
+  phone: yup.string().notRequired(),
+});
+
+export {
+  formLoginSchema,
+  formRegisterSchema,
+  formRegisterContactSchema,
+  formUpdateContactSchema,
+};
