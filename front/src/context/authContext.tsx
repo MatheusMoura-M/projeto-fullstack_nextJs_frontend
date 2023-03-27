@@ -27,7 +27,8 @@ import {
   useState,
 } from "react";
 import nookies from "nookies";
-import { CloseIcon, EditIcon, DeleteIcon } from "@chakra-ui/icons";
+import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
+import jwt_decode from "jwt-decode";
 
 interface iAuthProviderData {
   onLogin: (clientData: iClientLogin) => void;
@@ -35,7 +36,6 @@ interface iAuthProviderData {
   onRegisterContact: (contactData: iContactRegister) => void;
   onUpdateContact: (contactData: iContactRegister) => void;
   onGetAllContacts: (param: string) => void;
-  onGetClient: (param: string) => void;
   inputName: string;
   setInputName: Dispatch<SetStateAction<string>>;
   inputEmail: string;
@@ -62,11 +62,6 @@ interface iAuthProviderData {
   ClientItem: ({ id, name, email, phone }: iContactRegister) => JSX.Element;
 }
 
-const instantiateToken = () => {
-  const cookies = nookies.get();
-  api.defaults.headers.Authorization = `Bearer ${cookies["kenzie.token"]}`;
-};
-
 const AuthContext = createContext<iAuthProviderData>({} as iAuthProviderData);
 
 export const AuthProvider = ({ children }: iProviderProps) => {
@@ -84,6 +79,11 @@ export const AuthProvider = ({ children }: iProviderProps) => {
   const [getId, setGetId] = useState<iParams>();
   const [showModalUpdateContact, setShowModalUpdateContact] =
     useState<boolean>(false);
+
+  const instantiateToken = () => {
+    const cookies = nookies.get();
+    api.defaults.headers.Authorization = `Bearer ${cookies["kenzie.token"]}`;
+  };
 
   const toast = useToast();
   const router = useRouter();
@@ -192,8 +192,12 @@ export const AuthProvider = ({ children }: iProviderProps) => {
 
   const onGetClient = (param: string) => {
     instantiateToken();
+
+    const token = nookies.get()["kenzie.token"];
+    const decoded: any = jwt_decode(token);
+
     api
-      .get("/client")
+      .get(`/client/${decoded.sub}`)
       .then(({ data }) => {
         setClient([data]);
         {
@@ -270,7 +274,7 @@ export const AuthProvider = ({ children }: iProviderProps) => {
   const onGetAllContacts = (param: string) => {
     instantiateToken();
     api
-      .get("/contacts")
+      .get("client/contacts")
       .then(({ data }) => {
         setAllContacts(data);
         {
@@ -595,7 +599,6 @@ export const AuthProvider = ({ children }: iProviderProps) => {
         onUpdateContact,
         showModalUpdateContact,
         setShowModalUpdateContact,
-        onGetClient,
         client,
         setClient,
         isContainsClient,

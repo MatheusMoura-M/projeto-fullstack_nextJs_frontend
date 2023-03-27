@@ -40,7 +40,7 @@ const ModalUpdateContact = () => {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Atualize seu contato</ModalHeader>
+          <ModalHeader>Atualize</ModalHeader>
           <ModalBody pb={6}>
             <FormControl id="name">
               <FormLabel>Name</FormLabel>
