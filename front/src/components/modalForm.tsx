@@ -10,7 +10,6 @@ import {
   Modal,
   ModalBody,
   ModalContent,
-  ModalCloseButton,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
@@ -19,13 +18,11 @@ import {
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { iClientLogin } from "@/types";
-import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useAuth } from "@/context/authContext";
 import { formLoginSchema } from "@/schemas";
 
 const ModalForm = () => {
-  const { onLogin } = useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     inputEmail,
@@ -34,6 +31,7 @@ const ModalForm = () => {
     setInputEmail,
     setInputPassword,
     setShowPassword,
+    onLogin,
   } = useAuth();
 
   const emailError = inputEmail === "";
@@ -53,7 +51,7 @@ const ModalForm = () => {
 
   return (
     <>
-      <Button variant="default" onClick={onOpen}>
+      <Button variant="violet" onClick={onOpen}>
         Login
       </Button>
 
@@ -110,11 +108,8 @@ const ModalForm = () => {
           <ModalFooter>
             <Button
               size="lg"
-              variant={"default"}
+              variant={"violet"}
               onClick={handleSubmit(onFormSubmit)}
-              _hover={{
-                bg: "blue.700",
-              }}
             >
               Entrar
             </Button>

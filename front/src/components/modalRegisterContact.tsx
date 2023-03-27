@@ -1,12 +1,11 @@
 import {
+  Box,
   Button,
   FormControl,
   FormErrorMessage,
   FormHelperText,
   FormLabel,
   Input,
-  InputGroup,
-  InputRightElement,
   Modal,
   ModalBody,
   ModalContent,
@@ -17,55 +16,49 @@ import {
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { iClientRegister } from "@/types";
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { iContactRegister } from "@/types";
 import { useAuth } from "@/context/authContext";
-import { formRegisterSchema } from "@/schemas";
+import { formRegisterContactSchema } from "@/schemas";
 
-const ModalRegister = () => {
+const ModalRegisterContact = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const {
     inputName,
     inputEmail,
-    inputPassword,
     inputPhone,
-    showPassword,
     setInputName,
     setInputEmail,
-    setInputPassword,
     setInputPhone,
-    setShowPassword,
-    onRegister,
+    onRegisterContact,
   } = useAuth();
 
   const nameError = inputName === "";
   const emailError = inputEmail === "";
-  const passwordError = inputPassword === "";
   const phoneError = inputPhone === "";
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<iClientRegister>({
-    resolver: yupResolver(formRegisterSchema),
+  } = useForm<iContactRegister>({
+    resolver: yupResolver(formRegisterContactSchema),
   });
 
-  const onFormSubmit = (formData: iClientRegister) => {
-    onRegister(formData);
+  const onFormSubmit = (formData: iContactRegister) => {
+    onRegisterContact(formData);
   };
 
   return (
-    <>
+    <Box position={"absolute"} right={"4rem"}>
       <Button variant="violet" onClick={onOpen}>
-        Register
+        Register Contact
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Faça seu Cadatro</ModalHeader>
+          <ModalHeader>Cadatre um contato</ModalHeader>
           <ModalBody pb={6}>
             <FormControl id="name" isRequired isInvalid={nameError}>
               <FormLabel>Name</FormLabel>
@@ -83,6 +76,7 @@ const ModalRegister = () => {
                 <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
               )}
             </FormControl>
+
             <FormControl id="email" isRequired isInvalid={emailError}>
               <FormLabel>E-mail</FormLabel>
               <Input
@@ -99,34 +93,7 @@ const ModalRegister = () => {
                 <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
               )}
             </FormControl>
-            <FormControl id="password" isRequired isInvalid={passwordError}>
-              <FormLabel>Password</FormLabel>
-              <InputGroup>
-                <Input
-                  required
-                  focusBorderColor="blue.300"
-                  errorBorderColor="red.300"
-                  type={showPassword ? "text" : "password"}
-                  {...register("password")}
-                  onChange={(e) => setInputPassword(e.target.value)}
-                />
-                <InputRightElement h={"full"}>
-                  <Button
-                    variant={"ghost"}
-                    onClick={() =>
-                      setShowPassword((showPassword) => !showPassword)
-                    }
-                  >
-                    {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                  </Button>
-                </InputRightElement>
-              </InputGroup>
-              {!passwordError ? (
-                <FormHelperText>Digite sua senha</FormHelperText>
-              ) : (
-                <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
-              )}
-            </FormControl>
+
             <FormControl id="phone" isRequired isInvalid={phoneError}>
               <FormLabel>Phone</FormLabel>
               <Input
@@ -149,9 +116,6 @@ const ModalRegister = () => {
               size="lg"
               variant={"violet"}
               onClick={handleSubmit(onFormSubmit)}
-              _hover={{
-                bg: "blue.700",
-              }}
             >
               Cadastrar
             </Button>
@@ -161,8 +125,8 @@ const ModalRegister = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-    </>
+    </Box>
   );
 };
 
-export default ModalRegister;
+export default ModalRegisterContact;
