@@ -1,6 +1,10 @@
 # Front-End 
 
-Feat Front-End do projeto Full Stack
+Feat Front-End do projeto Full Stack onde você pode:
+
+- Criar uma conta
+- Fazer Login
+- Criar e armazenar seus contatos
 
 Feat [Back-End](https://github.com/MatheusMoura-M/projeto-fullstack_backend)
 
