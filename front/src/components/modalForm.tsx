@@ -15,10 +15,11 @@ import {
   ModalOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+
 import { iClientLogin } from "@/types";
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useAuth } from "@/context/authContext";
 import { formLoginSchema } from "@/schemas";
 

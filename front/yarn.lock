@@ -245,6 +245,14 @@
   dependencies:
     "@chakra-ui/icon" "3.0.13"
 
+"@chakra-ui/image@^2.0.15":
+  "integrity" "sha512-w2rElXtI3FHXuGpMCsSklus+pO1Pl2LWDwsCGdpBQUvGFbnHfl7MftQgTlaGHeD5OS95Pxva39hKrA2VklKHiQ=="
+  "resolved" "https://registry.npmjs.org/@chakra-ui/image/-/image-2.0.15.tgz"
+  "version" "2.0.15"
+  dependencies:
+    "@chakra-ui/react-use-safe-layout-effect" "2.0.5"
+    "@chakra-ui/shared-utils" "2.0.5"
+
 "@chakra-ui/image@2.0.12":
   "integrity" "sha512-uclFhs0+wq2qujGu8Wk4eEWITA3iZZQTitGiFSEkO9Ws5VUH+Gqtn3mUilH0orubrI5srJsXAmjVTuVwge1KJQ=="
   "resolved" "https://registry.npmjs.org/@chakra-ui/image/-/image-2.0.12.tgz"
@@ -542,6 +550,11 @@
   "resolved" "https://registry.npmjs.org/@chakra-ui/react-use-safe-layout-effect/-/react-use-safe-layout-effect-2.0.3.tgz"
   "version" "2.0.3"
 
+"@chakra-ui/react-use-safe-layout-effect@2.0.5":
+  "integrity" "sha512-MwAQBz3VxoeFLaesaSEN87reVNVbjcQBDex2WGexAg6hUB6n4gc1OWYH/iXp4tzp4kuggBNhEHkk9BMYXWfhJQ=="
+  "resolved" "https://registry.npmjs.org/@chakra-ui/react-use-safe-layout-effect/-/react-use-safe-layout-effect-2.0.5.tgz"
+  "version" "2.0.5"
+
 "@chakra-ui/react-use-size@2.0.5":
   "integrity" "sha512-4arAApdiXk5uv5ZeFKltEUCs5h3yD9dp6gTIaXbAdq+/ENK3jMWTwlqzNbJtCyhwoOFrblLSdBrssBMIsNQfZQ=="
   "resolved" "https://registry.npmjs.org/@chakra-ui/react-use-size/-/react-use-size-2.0.5.tgz"
@@ -635,6 +648,11 @@
   "integrity" "sha512-pCU+SUGdXzjAuUiUT8mriekL3tJVfNdwSTIaNeip7k/SWDzivrKGMwAFBxd3XVTDevtVusndkO4GJuQ3yILzDg=="
   "resolved" "https://registry.npmjs.org/@chakra-ui/shared-utils/-/shared-utils-2.0.3.tgz"
   "version" "2.0.3"
+
+"@chakra-ui/shared-utils@2.0.5":
+  "integrity" "sha512-4/Wur0FqDov7Y0nCXl7HbHzCg4aq86h+SXdoUeuCMD3dSj7dpsVnStLYhng1vxvlbUnLpdF4oz5Myt3i/a7N3Q=="
+  "resolved" "https://registry.npmjs.org/@chakra-ui/shared-utils/-/shared-utils-2.0.5.tgz"
+  "version" "2.0.5"
 
 "@chakra-ui/skeleton@2.0.18":
   "integrity" "sha512-qjcD8BgVx4kL8Lmb8EvmmDGM2ICl6CqhVE2LShJrgG7PDM6Rt6rYM617kqLurLYZjbJUiwgf9VXWifS0IpT31Q=="

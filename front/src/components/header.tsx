@@ -1,39 +1,28 @@
-import { ReactNode } from "react";
 import {
   Box,
   Flex,
   Avatar,
   HStack,
-  Link,
-  IconButton,
   Button,
   Menu,
   MenuButton,
   MenuList,
-  MenuItem,
-  useDisclosure,
-  Stack,
-  Text,
 } from "@chakra-ui/react";
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import { useRouter } from "next/router";
 import ModalForm from "./modalForm";
-import { destroyCookie } from "nookies";
 import { useAuth } from "@/context/authContext";
 import ModalRegister from "./modalRegister";
 import ModalRegisterContact from "./modalRegisterContact";
+import Image from "next/image";
+import imgAgenda from "../../public/assets/img_agenda.png";
 
-const Links = ["Contatos"];
-const BtnDefault = ["Sair", "Perfil"];
-const AllBtn = ["Contatos", "Sair", "Perfil"];
+const BtnDefault = ["Perfil", "Sair"];
 
-interface IHeaderProps {
+export interface IHeaderProps {
   isLogged?: boolean;
 }
 
 const Header = ({ isLogged = false }: IHeaderProps) => {
   const { NavLink, MenuHamburguer } = useAuth();
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
@@ -46,23 +35,14 @@ const Header = ({ isLogged = false }: IHeaderProps) => {
       >
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <HStack spacing={8} alignItems={"center"}>
-            <Box>
-              <Text fontWeight={"bold"} fontSize={20} color={"gray.800"}>
-                Kenzie
-              </Text>
+            <Box
+              display={"flex"}
+              boxSize={14}
+              alignItems={"center"}
+              justifyContent={"center"}
+            >
+              <Image width={45} src={imgAgenda} alt="img" />
             </Box>
-            {isLogged && (
-              <HStack
-                color={"white"}
-                as={"nav"}
-                spacing={4}
-                display={{ base: "none", md: "flex" }}
-              >
-                {Links.map((link) => (
-                  <NavLink key={link}>{link}</NavLink>
-                ))}
-              </HStack>
-            )}
           </HStack>
           <Flex alignItems={"center"}>
             {isLogged ? (
@@ -70,9 +50,6 @@ const Header = ({ isLogged = false }: IHeaderProps) => {
                 <ModalRegisterContact />
                 <HStack
                   flexDirection={"column"}
-                  position={"absolute"}
-                  top={"1rem"}
-                  right={"1rem"}
                   alignItems={"flex-end"}
                   gap={"0.5rem"}
                 >
@@ -101,7 +78,7 @@ const Header = ({ isLogged = false }: IHeaderProps) => {
                         <MenuHamburguer key={link}>{link}</MenuHamburguer>
                       ))}
                     </MenuList>
-                    <MenuList
+                    {/* <MenuList
                       display={{ base: "flex", md: "none" }}
                       flexDirection={"column"}
                       maxH={"max-content"}
@@ -115,7 +92,7 @@ const Header = ({ isLogged = false }: IHeaderProps) => {
                       {AllBtn.map((link) => (
                         <MenuHamburguer key={link}>{link}</MenuHamburguer>
                       ))}
-                    </MenuList>
+                    </MenuList> */}
                   </Menu>
                 </HStack>
               </>
