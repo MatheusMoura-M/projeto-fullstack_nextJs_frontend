@@ -61,13 +61,12 @@ const custonTheme = extendTheme({
     "2xl": "1rem",
     "3xl": "1.5rem",
   },
-
   styles: {
     global: {
       body: {
-        bg: "rgb(25,3,43)",
+        bg: "rgb(152,17,193,1)",
         bgGradient:
-          "linear-gradient(35deg, rgba(25,3,43,1) 0%, rgba(63,14,111,1) 45%, rgba(152,17,193,1) 87%)",
+          "linear-gradient(35deg, rgba(152,17,193,1) 0%, rgba(61, 19, 102) 65%, rgba(41, 5, 70) 99%)",
       },
     },
   },
@@ -141,7 +140,7 @@ const custonTheme = extendTheme({
           bg: "red.600",
           border: "2px solid",
           borderColor: "red.700",
-          borderRadius: "50%",
+          borderRadius: "full",
           color: "gray.200",
           p: "0px",
           _hover: {

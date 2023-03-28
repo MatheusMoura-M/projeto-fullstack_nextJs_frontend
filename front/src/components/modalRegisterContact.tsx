@@ -51,7 +51,7 @@ const ModalRegisterContact = () => {
 
   return (
     <Box position={"absolute"} right={"4rem"}>
-      <Button variant="violet" onClick={onOpen}>
+      <Button variant="violet" width={"9rem"} onClick={onOpen}>
         Register Contact
       </Button>
 

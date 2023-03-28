@@ -11,6 +11,7 @@ import {
   Box,
   Button,
   Link,
+  List,
   ListItem,
   MenuItem,
   Text,
@@ -87,6 +88,35 @@ export const AuthProvider = ({ children }: iProviderProps) => {
 
   const toast = useToast();
   const router = useRouter();
+
+  const onGetAllContacts = (param: string) => {
+    instantiateToken();
+    api
+      .get("client/contacts")
+      .then(({ data }) => {
+        setAllContacts(data);
+      })
+      .catch((err) => {
+        toast({
+          title: "error",
+          variant: "solid",
+          position: "top-right",
+          isClosable: true,
+          render: () => (
+            <Box
+              color={"red.50"}
+              p={3}
+              bg={"red.600"}
+              fontWeight={"bold"}
+              borderRadius={"md"}
+            >
+              Ops, algo deu errado
+            </Box>
+          ),
+        });
+        console.log(err);
+      });
+  };
 
   const logout = (param: string) => {
     if (param === "CloseModal") {
@@ -271,38 +301,6 @@ export const AuthProvider = ({ children }: iProviderProps) => {
       });
   };
 
-  const onGetAllContacts = (param: string) => {
-    instantiateToken();
-    api
-      .get("client/contacts")
-      .then(({ data }) => {
-        setAllContacts(data);
-        {
-          param === "Contatos" && setIsContainsContacts(!isContainsContacts);
-        }
-      })
-      .catch((err) => {
-        toast({
-          title: "error",
-          variant: "solid",
-          position: "top-right",
-          isClosable: true,
-          render: () => (
-            <Box
-              color={"red.50"}
-              p={3}
-              bg={"red.600"}
-              fontWeight={"bold"}
-              borderRadius={"md"}
-            >
-              Ops, algo deu errado
-            </Box>
-          ),
-        });
-        console.log(err);
-      });
-  };
-
   const onUpdateContact = (contactData: iContactRegister) => {
     instantiateToken();
     const { id, param } = getId!;
@@ -436,25 +434,23 @@ export const AuthProvider = ({ children }: iProviderProps) => {
         transition: "0.5s",
       }}
       transition={"0.5s"}
-      href={"#"}
-      onClick={
-        children === "Contatos" ? () => onGetAllContacts("Contatos") : undefined
-      }
+      onClick={children === "Contatos" ? () => onGetAllContacts("") : undefined}
     >
       {children}
     </Link>
   );
 
   const ContactItem = ({ id, name, email, phone }: iContactRegister) => (
-    <Box
+    <ListItem
       display={"flex"}
-      justifyContent={"space-between"}
+      justifyContent={"space-between  "}
+      height={"120px"}
+      width={"90%"}
+      p={3}
       bg={"#6b1885"}
+      rounded={"md"}
       borderColor={"#b02be5"}
       border={"2px solid"}
-      color={"gray.200"}
-      p={3}
-      rounded={"md"}
       _hover={{
         textDecoration: "none",
         bg: "#b02be5",
@@ -464,16 +460,16 @@ export const AuthProvider = ({ children }: iProviderProps) => {
       }}
       transition={"0.5s"}
     >
-      <VStack alignItems={"unset"}>
-        <ListItem>
+      <VStack alignItems={"unset"} width={"90%"}>
+        <Text>
           <strong>Nome:</strong> {name}
-        </ListItem>
-        <ListItem>
+        </Text>
+        <Text>
           <strong>Email:</strong> {email}
-        </ListItem>
-        <ListItem>
+        </Text>
+        <Text>
           <strong>Telefone:</strong> {phone}
-        </ListItem>
+        </Text>
       </VStack>
       <VStack justifyContent={"space-around"}>
         <Button
@@ -493,7 +489,7 @@ export const AuthProvider = ({ children }: iProviderProps) => {
           <EditIcon fontSize={15} />
         </Button>
       </VStack>
-    </Box>
+    </ListItem>
   );
 
   const ClientItem = ({ id, name, email, phone }: iContactRegister) => (
@@ -555,11 +551,7 @@ export const AuthProvider = ({ children }: iProviderProps) => {
       border={"1px solid"}
       borderColor={"#b02be5"}
       onClick={
-        children === "Sair"
-          ? () => logout("")
-          : children === "Contatos"
-          ? () => onGetAllContacts("Contatos")
-          : () => onGetClient("Client")
+        children === "Sair" ? () => logout("") : () => onGetClient("Client")
       }
       _hover={{
         bg: "#b02be5",
