@@ -78,27 +78,11 @@ const Header = ({ isLogged = false }: IHeaderProps) => {
                         <MenuHamburguer key={link}>{link}</MenuHamburguer>
                       ))}
                     </MenuList>
-                    {/* <MenuList
-                      display={{ base: "flex", md: "none" }}
-                      flexDirection={"column"}
-                      maxH={"max-content"}
-                      bg={"#6b1885"}
-                      _hover={{
-                        color: "white",
-                      }}
-                      transition="0.2s"
-                      minW={"100px"}
-                    >
-                      {AllBtn.map((link) => (
-                        <MenuHamburguer key={link}>{link}</MenuHamburguer>
-                      ))}
-                    </MenuList> */}
                   </Menu>
                 </HStack>
               </>
             ) : (
               <HStack spacing={5}>
-                <ModalForm />
                 <ModalRegister />
               </HStack>
             )}
