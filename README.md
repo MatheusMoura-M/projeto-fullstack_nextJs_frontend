@@ -1,5 +1,12 @@
 # Front-End 
 
+# Agenda📞
+Nessa aplicação você pode: 
+- Cadastrar / Editar / Deletar usuários
+- Fazer login
+- Cadastrar / Editar / Deletar Contatos
+
+#
 Feat Front-End do projeto Full Stack onde você pode:
 
 - Criar uma conta
