@@ -46,7 +46,7 @@ const ModalRegisterContact = () => {
   });
 
   const onFormSubmit = (formData: iContactRegister) => {
-    onRegisterContact(formData);
+    onRegisterContact(formData, onClose);
   };
 
   return (

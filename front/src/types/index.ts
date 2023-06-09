@@ -33,3 +33,8 @@ export interface iParams {
 export interface iProviderProps {
   children: ReactNode;
 }
+
+export interface iRegisterContact {
+  contactData: iContactRegister;
+  onClose: () => void;
+}

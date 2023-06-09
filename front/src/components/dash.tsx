@@ -42,7 +42,22 @@ const Dash = () => {
           mb={"1rem"}
           borderColor={"#b02be5"}
           border={"2px solid"}
-          overflowY={"scroll"}
+          overflowY={"auto"}
+          sx={{
+            "::-webkit-scrollbar": {
+              w: "10px",
+              h: "12px",
+            },
+            "::-webkit-scrollbar-track": {
+              bg: "#ad61cb",
+              borderRadius: "10px",
+              w: "10px",
+            },
+            "::-webkit-scrollbar-thumb": {
+              bg: "#431e53",
+              borderRadius: "24px",
+            },
+          }}
         >
           {allContacts ? (
             allContacts.map((contact: iContactResponse) => (

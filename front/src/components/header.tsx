@@ -8,7 +8,6 @@ import {
   MenuButton,
   MenuList,
 } from "@chakra-ui/react";
-import ModalForm from "./modalForm";
 import { useAuth } from "@/context/authContext";
 import ModalRegister from "./modalRegister";
 import ModalRegisterContact from "./modalRegisterContact";
@@ -22,7 +21,7 @@ export interface IHeaderProps {
 }
 
 const Header = ({ isLogged = false }: IHeaderProps) => {
-  const { NavLink, MenuHamburguer } = useAuth();
+  const { MenuHamburguer } = useAuth();
 
   return (
     <>

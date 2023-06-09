@@ -23,7 +23,7 @@ const Dashboard = () => {
   return (
     <>
       <Header isLogged />
-      <Dash></Dash>
+      <Dash />
       {isContainsContacts && <ContactsList />}
       {showModalUpdateContact && <ModalUpdateContact />}
       {isContainsClient && <ModalClient />}
