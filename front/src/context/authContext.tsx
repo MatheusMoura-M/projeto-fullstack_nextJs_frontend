@@ -34,7 +34,10 @@ import jwt_decode from "jwt-decode";
 interface iAuthProviderData {
   onLogin: (clientData: iClientLogin) => void;
   onRegister: (clientData: iClientRegister) => void;
-  onRegisterContact: (contactData: iContactRegister) => void;
+  onRegisterContact: (
+    contactData: iContactRegister,
+    onClose: () => void
+  ) => void;
   onUpdateContact: (contactData: iContactRegister) => void;
   onGetAllContacts: (param: string) => void;
   inputName: string;
@@ -256,7 +259,10 @@ export const AuthProvider = ({ children }: iProviderProps) => {
       });
   };
 
-  const onRegisterContact = (contactData: iContactRegister) => {
+  const onRegisterContact = (
+    contactData: iContactRegister,
+    onClose: () => void
+  ) => {
     instantiateToken();
     api
       .post("/contacts", contactData)
@@ -278,6 +284,8 @@ export const AuthProvider = ({ children }: iProviderProps) => {
             </Box>
           ),
         });
+        onGetAllContacts("");
+        onClose();
       })
       .catch((err) => {
         toast({
