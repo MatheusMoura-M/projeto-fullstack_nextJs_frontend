@@ -30,6 +30,13 @@ Instalacão e execucão do projeto utilizando yarn:
   bash yarn dev
 ``` 
 
+## Screenshots
+
+![App Screenshot](https://github.com/MatheusMoura-M/projeto-fullstack_nextJs_frontend/blob/main/front/public/assets/screenshots/login.png)
+
+
+![App Screenshot](https://github.com/MatheusMoura-M/projeto-fullstack_nextJs_frontend/blob/main/front/public/assets/screenshots/dash.png)
+
 ## Documentação do projeto
 
 [Documentação](https://matheusmoura-m.github.io/projeto_fullsatack-Docs/)
